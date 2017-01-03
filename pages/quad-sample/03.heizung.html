@@ -1,0 +1,49 @@
+/**
+ * -----------------------------------------------------------------------------
+ * @package     smartVISU
+ * @author      Niko Will
+ * @copyright   2013
+ * @license     GPL <http://www.gnu.de>
+ * -----------------------------------------------------------------------------
+ */
+
+{% extends "base.html" %}
+
+{% block title %}
+Heizung
+{% endblock %}
+
+{% block header %}
+<img class="icon" src='{{ icon0 }}sani_heating.svg'/>
+{% endblock %}
+
+{% block content %}
+{% import "widget_list.html" as list %}
+<ul data-role="listview" data-dividertheme="c" class="nw_list">
+    <li data-role="list-divider">Aussentemperatur</li>
+    {{ list.float('ow.at_nord', 'Nordseite 1-Wire', 'ow.AT_Nord', '°C') }}
+    {{ list.float('ebus.at_temp', 'Nordseite Heizung', 'ebus.at_temp', '°C') }}    
+    <li data-role="list-divider">Erdgeschoss</li>
+    {{ list.rtr('heizung.eg.kueche.heizung', 'Küche', 'ow.EG_Kueche_RT', 'heizung.eg.kueche.stellwert', 'heizung.eg.kueche.soll', 'heizung.eg.kueche.sollwertverschiebung', 'heizung.eg.kueche.komfort', 'heizung.eg.kueche.nacht', 'heizung.eg.kueche.frostschutz', 'heizung.eg.kueche.heizen') }}
+    {{ list.float('heizung.eg.wohnzimmer.ist', 'Wohnzimmer', 'ow.EG_Wohnzimmer_RT_MS', '°C') }}
+    {{ list.rtr('heizung.eg.flur.heizung', 'Flur', 'ow.EG_Flur_RT', 'heizung.eg.flur.stellwert', 'heizung.eg.flur.soll', 'heizung.eg.flur.sollwertverschiebung', 'heizung.eg.flur.komfort', 'heizung.eg.flur.nacht', 'heizung.eg.flur.frostschutz', 'heizung.eg.flur.heizen') }}
+    {{ list.rtr('heizung.eg.wc.heizung', 'WC', 'ow.EG_Gaeste_WC_RT', 'heizung.eg.wc.stellwert', 'heizung.eg.wc.soll', 'heizung.eg.wc.sollwertverschiebung', 'heizung.eg.wc.komfort', 'heizung.eg.wc.nacht', 'heizung.eg.wc.frostschutz', 'heizung.eg.wc.heizen') }}
+
+    <li data-role="list-divider">Obergeschoss</li>
+    {{ list.rtr('heizung.og.arbeitszimmer', 'Arbeitszimmer', 'ow.OG_Arbeitszimmer_RT_MS', 'heizung.og.arbeitszimmer.stellwert', 'heizung.og.arbeitszimmer.soll', 'heizung.og.arbeitszimmer.sollwertverschiebung', '', '', '', '') }}
+    {{ list.rtr('heizung.og.flur', 'Flur', 'ow.OG_Flur_RT', 'heizung.og.flur.stellwert', 'heizung.og.flur.soll', 'heizung.og.flur.sollwertverschiebung', '', '', '', '') }}
+    {{ list.rtr('heizung.og.bad', 'Bad', 'ow.OG_Bad_RT_MS', 'heizung.og.bad.stellwert', 'heizung.og.bad.soll', 'heizung.og.bad.sollwertverschiebung', '', '', '', '') }}
+    {{ list.rtr('heizung.og.schlafzimmer', 'Schlafzimmer', 'ow.OG_Schlafzimmer_RT_MS', 'heizung.og.schlafzimmer.stellwert', 'heizung.og.schlafzimmer.soll', 'heizung.og.schlafzimmer.sollwertverschiebung', '', '', '', '') }}
+    {{ list.rtr('heizung.og.bruno', 'Bruno', 'ow.OG_Bruno_RT', 'heizung.og.bruno.stellwert', 'heizung.og.bruno.soll', 'heizung.og.bruno.sollwertverschiebung', '', '', '', '') }}
+    {{ list.rtr('heizung.og.karl', 'Karl', 'ow.OG_Karl_RT', 'heizung.og.karl.stellwert', 'heizung.og.karl.soll', 'heizung.og.karl.sollwertverschiebung', '', '', '', '') }}
+</ul>
+
+{% endblock %}
+
+{% block quad_top %}
+{% endblock %}
+
+{% block quad_bottom %}
+{% endblock %}
+
+

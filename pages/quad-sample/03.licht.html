@@ -1,0 +1,59 @@
+/**
+ * -----------------------------------------------------------------------------
+ * @package     smartVISU
+ * @author      Niko Will
+ * @copyright   2013
+ * @license     GPL <http://www.gnu.de>
+ * -----------------------------------------------------------------------------
+ */
+
+
+{% extends "base.html" %}
+
+{% block title %}
+Licht
+{% endblock %}
+
+{% block header %}
+<img class="icon" src='{{ icon0 }}light_light.svg'/>
+{% endblock %}
+
+{% block content %}
+{% import "widget_list.html" as list %}
+<ul data-role="listview" data-dividertheme="c" class="nw_list">
+    <li data-role="list-divider">Erdgeschoss</li>
+    {{ list.dimmer('eg.kueche.licht','Küche','eg.kueche.licht_decke.switch','eg.kueche.licht_decke.dim') }}
+    {{ list.dimmer('eg.essenzimmer','Essen','eg.esszimmer.licht_decke.switch','eg.esszimmer.licht_decke.dim') }}
+    {{ list.dimmer('eg.wohnen.licht','Wohnen','eg.wohnzimmer.licht_decke.switch','eg.wohnzimmer.licht_decke.dim') }}
+    {{ list.switch('eg.wohnen.licht_tv','TV-Backlight','eg.wohnzimmer.std_tv_licht.switch', '', 'message_socket.svg', 'message_socket.svg') }}
+    {{ list.switch('eg.wohnen.licht_sideboard','Sideboard-Backlight','eg.wohnzimmer.std_sideboard_licht.switch', '', 'message_socket.svg', 'message_socket.svg') }}
+    {{ list.dimmer('eg.flur_klein.licht_decke', 'Flur', 'eg.flur_klein.licht_decke.switch', 'eg.flur_klein.licht_decke.dim', '', 'eg.flur_klein.pm.sperre') }}
+    {{ list.dimmer('eg.flur_gross.licht_decke', 'Hausflur', 'eg.flur_gross.licht_decke.switch', 'eg.flur_gross.licht_decke.dim', '', 'eg.flur_gross.pm.sperre') }}
+    {{ list.dimmer('eg.wc.licht_decke', 'Toilette Decke', 'eg.wc.licht_decke.switch', 'eg.wc.licht_decke.dim') }}
+    {{ list.dimmer('eg.wc.licht_spiegel', 'Toilette Spiegel', 'eg.wc.licht_spiegel.switch', 'eg.wc.licht_spiegel.dim') }}
+
+<li data-role="list-divider">Obergeschoss</li>
+    {{ list.dimmer('og.schlafen.licht', 'Schlafen', 'og.schlafen.licht_decke.switch', 'og.schlafen.licht_decke.dim') }}
+    {{ list.dimmer('og.ankleide.licht', 'Ankleide', 'og.schlafen.licht_ankleide.switch', 'og.schlafen.licht_ankleide.dim') }}   
+    {{ list.dimmer('og.schlafen.wakeup', 'Wakeup-Light', 'og.schlafen.std_wakeup_light.switch', 'og.schlafen.std_wakeup_light.dim', 'uzsu.og_schlafzimmer_std_wakeup_light') }}
+    {{ list.dimmer('og.bad.licht_decke', 'Bad Deckensegel', 'og.bad.licht_decke_w.switch', 'og.bad.licht_decke_w.dim') }}
+    {{ list.dimmer('og.bad.licht_spiegel', 'Bad Spiegel', 'og.bad.licht_spiegel.switch', 'og.bad.licht_spiegel.dim') }}
+    {{ list.dimmer('og.bad.licht_spots', 'Bad Deckenspots', 'og.bad.licht_spots.switch', 'og.bad.licht_spots.dim') }}
+    {{ list.dimmer('og.bad.licht_wanne', 'Bad Badewanne', 'og.bad.licht_wanne.switch', 'og.bad.licht_wanne.dim') }}
+    {{ list.dimmer('og.bad.licht_dusche', 'Bad Dusche', 'og.bad.licht_dusche.switch', 'og.bad.licht_dusche.dim') }}
+    {{ list.dimmer('og.arbeiten.licht_indirekt', 'Arbeiten', 'og.arbeiten.licht_decke_indirekt.switch', 'og.arbeiten.licht_decke_indirekt.dim') }}
+    {{ list.dimmer('og.arbeiten.licht_direkt', 'Arbeiten', 'og.arbeiten.licht_decke_direkt.switch', 'og.arbeiten.licht_decke_direkt.dim') }}
+    {{ list.dimmer('og.bruno.licht', 'Bruno', 'og.bruno.licht_decke.switch', 'og.bruno.licht_decke.dim') }}
+    {{ list.dimmer('og.karl.licht', 'Karl', 'og.karl.licht_decke.switch', 'og.karl.licht_decke.dim','', 'og.flur.pm.sperre') }}
+    {{ list.dimmer('og.flur.licht', 'Flur', 'og.flur.licht_decke.switch', 'og.flur.licht_decke.dim','og.flur.pm.sperre') }}
+/**    
+***<li data-role="list-divider">Garten/Garage</li>
+***    {{ list.dimmer('aa.terrasse.licht', 'Wandlampen', 'aa.terrasse.licht', 'aa.terrasse.licht.wert') }}
+***    {{ list.dimmer('aa.terrasse.kugel.gross', 'Kugel groß', 'aa.terrasse.kugel.gross', 'aa.terrasse.kugel.gross.wert') }}
+***    {{ list.dimmer('aa.terrasse.kugel.mittel', 'Kugel mittel', 'aa.terrasse.kugel.mittel', 'aa.terrasse.kugel.mittel.wert') }}
+***    {{ list.dimmer('aa.terrasse.kugel.klein', 'Kugel klein', 'aa.terrasse.kugel.klein', 'aa.terrasse.kugel.klein.wert') }}
+**/
+</ul>
+
+{% endblock %}
+

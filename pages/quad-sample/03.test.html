@@ -1,0 +1,82 @@
+/**
+ * -----------------------------------------------------------------------------
+ * @package     smartVISU
+ * @author      Mirko Hirsch
+ * @copyright   2015
+ * @license     GPL <http://www.gnu.de>
+ * -----------------------------------------------------------------------------
+ */
+
+{% extends "base.html" %}
+{% import "widget_list.html" as list %}
+{% import "widget_visu.html" as visu %}
+
+
+{% block title %}
+Samples
+{% endblock %}
+
+{% block header %}
+<img class="icon" src='{{ icon0 }}measure_power_meter.svg'/>
+{% endblock %}
+
+{% block content %}
+    
+<ul data-role="listview" data-dividertheme="c" class="nw_list">
+    <li data-role="list-divider">plot-popup</li>
+    <div>
+    <a href="#plot-popup_unique_id" data-rel="popup">plot1 ... just as textlink </a>
+        <div class="nw_plot-popup" id="plot-popup_unique_id" data-role="popup">
+        {{ plot.period('ptag1', 'zaehler.haushalt.verbrauch.gestern', 'avg', '1w', '', '', '', '', 'Haushalt', '#aa0', 'area', '', '') }}
+        </div>
+    </div>
+    {{ list.plotpopup('plot0', 'Überschrift0', 'Text0', 'icons/ws/measure_power_meter.svg', 'zaehler.haushalt.verbrauch.gestern', 'avg', '1w', '', '', '', '', 'Haushalt', '#aa0', 'area', '', '') }}    
+    {{ list.plotpopup('plot1', 'Überschrift1', ['Text1','Text2'], ['icons/ws/measure_power_meter.svg',''], ['zaehler.haushalt.verbrauch.gestern','zaehler.wp.verbrauch.gestern'], ['avg','avg'], ['1w','2w'], ['',''], ['',''], ['',''], ['',''], ['Haushalt','WP'], ['#aa0','#a00'], ['area','line'], ['',''], ['','']) }}
+    {{ list.plotpopup('plot2', 'Überschrift2', ['Text1','Text2',' '], ['icons/ws/measure_power_meter.svg','',''], ['zaehler.haushalt.verbrauch.gestern','zaehler.wp.verbrauch.gestern',''], ['avg','avg',''], ['1w','2w',''], ['','',''], ['','',' '], ['','',''], ['','',''], ['Haushalt','WP',''], ['#aa0','#a00',''], ['area','line',''], ['','',''], ['','','']) }}
+    {{ list.plotpopup('plot3', 'Überschrift3', ['Text1',' ','Text3'], ['icons/ws/measure_power_meter.svg',' ','icons/ws/measure_power_meter.svg'], ['zaehler.haushalt.verbrauch.gestern',' ','zaehler.wp.verbrauch.gestern'], ['avg','','avg'], ['1w','','2w'], ['','',''], ['','',''], ['','',''], ['','',''], ['Haushalt','','WP'], ['#aa0','','#a00'], ['area','','line'], ['','',''], ['','','']) }}
+    
+    <li data-role="list-divider">mvalue</li>
+    {{ list.mvalue('mvalue1', 'Alle', ['zaehler.haushalt.leistung','zaehler.wp.cop.tag','zaehler.wp.leistung'], ['kW','COP','kW']) }}
+    {{ list.mvalue('mvalue2', 'Zweispaltig', ['zaehler.haushalt.leistung','zaehler.wp.cop.tag'], ['kW','COP']) }}
+    {{ list.mvalue('mvalue3', 'Dreispaltig mitte leer', ['zaehler.haushalt.leistung',' ','zaehler.wp.leistung'], ['kW',' ','kW']) }}
+    {{ list.mvalue('mvalue4', 'Einspaltig', 'zaehler.haushalt.leistung', 'kW') }}
+    
+    <li data-role="list-divider">mswitch</li>
+    {{ list.mswitch('mswitch1', 'Mit UZSU', ['gad1','gad2','gad3'],['gad1.uzsu','gad2.uzsu','gad3.uzsu'], '' , '') }}
+    {{ list.mswitch('mswitch2', 'ohne UZSU', ['gad1','gad2','gad3'],'', '' , '') }}
+    {{ list.mswitch('mswitch3', 'gemischt', ['gad1','gad2','gad3'],['gad1.uzsu','gad3.uzsu'], '' , '') }}
+    {{ list.mswitch('mswitch4', 'Zweispaltig', ['gad1','gad2'],['gad1.uzsu',''], '' , '') }}
+    {{ list.mswitch('mswitch5', 'Dreispaltig mitte leer', ['gad1',' ','gad2'],['gad1.uzsu','',''], '' , '') }}
+    
+    <li data-role="list-divider">mstring</li>
+    {{ list.mstring('string1', 'Überschrift',['Spalte1','Spalte2','Spalte 3'],['icons/ws/measure_power_meter.svg','icons/ws/message_socket.svg','icons/ws/sani_heating.svg'])}}
+    {{ list.mstring('string2', 'Alle',['Spalte1','Spalte2','Spalte 3'])}}
+    {{ list.mstring('string3', 'Zweispaltig',['Spalte1','Spalte2'])}}
+    {{ list.mstring('string4', 'Dreispaltig mitte leer',['Spalte1',' ','Spalte 3'])}}
+    {{ list.mstring('string5', 'Überschrift','Spalte1')}}
+
+    <li data-role="list-divider">maptext</li>
+    {{ list.maptext('status_hk_text1', 'maptext', 'ebus.status_hk', ['Heizen','Aus','Auto','Eco','Absenken'], [1, 2, 3, 4, 5], 1) }}
+    {{ list.mmaptext('status_hk_text2', 'mmaptext', ['ebus.status_hk',' ',' '], [['Heizen','Aus','Auto','Eco','Absenken'],' ',' '], [[1, 2, 3, 4, 5],' ',' ']) }}
+    {{ list.mmaptext('status_hk_text3', 'Heizbetrieb', ['ebus.status_hk','ebus.status_ww'], [['Heizen','Aus','Auto','Eco','Absenken'],['ens','zwe','dre','vier','fünf']], [[1, 2, 3, 4, 5],[1, 2, 3, 4, 5]]) }}
+    
+	<li data-role="list-divider">list slider</li>
+	{{ list.slider('volume', 'Volume', 'mm.denon.main.MasterVolume', 0, 25, 1) }}
+</ul>    
+{% endblock %}
+
+{% block quad_main_bottom %}   
+{% endblock %}
+
+
+{% block quad_top %}
+{{ visu.activelist('active1', 'eg.flur_klein.licht_decke.switch', 'Flur klein', 'icons/ws/light_light.svg', 'icons/ws/light_light.svg') }}
+{{ visu.activelist('active2', 'eg.flur_gross.licht_decke.switch', 'Flur gross', 'icons/ws/light_light.svg', 'icons/ws/light_light.svg') }}
+{{ visu.activelist('active3',  'eg.wohnzimmer.std_sideboard_licht.switch', 'Sideboard',  'icons/ws/message_socket.svg', 'icons/ws/message_socket.svg', '1', '0') }}
+{% endblock %}
+
+{% block quad_bottom %}
+<ul data-role="listview" data-dividertheme="c" class="nw_list">
+</ul>
+{% endblock %}
+

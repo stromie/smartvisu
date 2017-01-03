@@ -1,0 +1,42 @@
+/**
+ * -----------------------------------------------------------------------------
+ * @package     smartVISU
+ * @author      Niko Will
+ * @copyright   2013
+ * @license     GPL <http://www.gnu.de>
+ * -----------------------------------------------------------------------------
+ */
+
+{% extends "base.html" %}
+
+{% block title %}
+Schlafen
+{% endblock %}
+
+{% block header %}
+<img class="icon" src='{{ icon0 }}scene_sleeping.svg'/>
+{% endblock %}
+
+{% block content %}
+{% import "widget_list.html" as list %}
+<ul data-role="listview" data-dividertheme="c" class="nw_list">
+    {{ list.dimmer('dg.schlafen.licht', 'Deckenlampe', 'dg.schlafen.licht', 'dg.schlafen.licht.wert') }}
+    {{ list.switch('dg.schlafen.nachtlicht.rechts', 'Nadine', 'dg.schlafen.nachtlicht.rechts', 'light_light.svg', 'light_light.svg') }}
+    {{ list.switch('dg.schlafen.nachtlicht.links', 'Niko', 'dg.schlafen.nachtlicht.links', 'light_light.svg', 'light_light.svg') }}
+    {{ list.switch('modus.schlafen.nadine', 'Schlafen Nadine', 'modus.schlafen.nadine', 'scene_sleeping.svg', 'scene_sleeping.svg') }}
+    {{ list.switch('modus.schlafen.niko', 'Schlafen Niko', 'modus.schlafen.niko', 'scene_sleeping.svg', 'scene_sleeping.svg') }}
+    {{ list.dimmerEx('dg.schlafen.audio', 'Audio Volume', 'dg.schlafen.audio', 'dg.schlafen.audio.volume', 'audio_volume_high.svg', 'audio_volume_high.svg', 0, 30, 1) }}
+    {{ list.switch('dg.schlafen.audio.mute', 'Audio Mute', 'dg.schlafen.audio.mute', 'audio_volume_mute.svg', 'audio_volume_mute.svg') }}
+    {{ list.switch('dg.schlafen.audio.loudness', 'Audio Loudness', 'dg.schlafen.audio.loudness', 'audio_loudness.svg', 'audio_loudness.svg') }}
+    {{ list.rtr('dg.schlafen.heizung', 'Heizung', 'dg.schlafen.heizung.ist', 'dg.schlafen.heizung.stellwert', 'dg.schlafen.heizung.soll', 'dg.schlafen.heizung.sollwertverschiebung', 'dg.schlafen.heizung.komfort', 'dg.schlafen.heizung.nacht', 'dg.schlafen.heizung.frostschutz', 'dg.schlafen.heizung.heizen') }}
+</ul>
+{% endblock %}
+
+{% block quad_top %}
+{{ plot.period('plot.dg.schlafen.heizung.ist', 'dg.schlafen.heizung.ist', 'avg', '1w', 0, 15, 25, '', 'Ist', '', '', '', '1h') }}
+{% endblock %}
+
+{% block quad_bottom %}
+{{ plot.period('plot.dg.schlafen.heizung.stellwert', 'dg.schlafen.heizung.stellwert', 'avg', '1w', 0, 0, 100, '', 'Stellwert', '', '', '', '1h') }}
+{% endblock %}
+

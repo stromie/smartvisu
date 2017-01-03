@@ -1,0 +1,38 @@
+/**
+ * -----------------------------------------------------------------------------
+ * @package     smartVISU
+ * @author      Niko Will
+ * @copyright   2013
+ * @license     GPL <http://www.gnu.de>
+ * -----------------------------------------------------------------------------
+ */
+ 
+{% extends "base.html" %}
+
+{% block title %}
+Masterbad
+{% endblock %}
+
+{% block header %}
+<img class="icon" src='{{ icon0 }}scene_bathroom.svg'/>
+{% endblock %}
+
+{% block content %}
+{% import "widget_list.html" as list %}
+<ul data-role="listview" data-dividertheme="c" class="nw_list">
+    
+</ul>
+{% endblock %}
+
+{% block quad_top %}
+    
+/**SQUEEZE*/
+{% import "widget_squeezebox.html" as squeezebox %}
+<h3>Squeezebox Radio</h3>
+    {{squeezebox.control('Squeezebox', 'Squeezebox.Power', 'Squeezebox.Play', 'Squeezebox.Pause', 'Squeezebox.Stop','Squeezebox.Playlist_Forward', 'Squeezebox.Playlist_Backward', 'Squeezebox.Volume', 'Squeezebox.Mute', 'Squeezebox.Title', 'Squeezebox.Artist','Squeezebox.Repeat', 'Squeezebox.Playlist_Load_Internetradio', 'Squeezebox.Duration', 'Squeezebox.Time') }}
+    
+{% endblock %}
+
+{% block quad_bottom %}
+{% endblock %}
+

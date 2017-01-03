@@ -1,0 +1,35 @@
+/**
+ * -----------------------------------------------------------------------------
+ * @package     smartVISU
+ * @author      Niko Will
+ * @copyright   2013
+ * @license     GPL <http://www.gnu.de>
+ * -----------------------------------------------------------------------------
+ */
+
+{% extends "base.html" %}
+
+{% block title %}
+Arbeiten
+{% endblock %}
+
+{% block header %}
+<img class="icon" src='{{ icon0 }}scene_office.svg'/>
+{% endblock %}
+
+{% block content %}
+{% import "widget_list.html" as list %}
+<ul data-role="listview" data-dividertheme="c" class="nw_list">
+    {{ list.dimmer('dg.arbeiten.licht', 'Deckenspots', 'dg.arbeiten.licht', 'dg.arbeiten.licht.wert') }}
+    {{ list.rtr('dg.arbeiten.heizung', 'Heizung', 'dg.arbeiten.heizung.ist', 'dg.arbeiten.heizung.stellwert', 'dg.arbeiten.heizung.soll', 'dg.arbeiten.heizung.sollwertverschiebung', 'dg.arbeiten.heizung.komfort', 'dg.arbeiten.heizung.nacht', 'dg.arbeiten.heizung.frostschutz', 'dg.arbeiten.heizung.heizen') }}
+</ul>
+{% endblock %}
+
+{% block quad_top %}
+{{ plot.period('plot.dg.arbeiten.heizung.ist', 'dg.arbeiten.heizung.ist', 'avg', '1w', 0, 15, 25, '', 'Ist', '', '', '', '1h') }}
+{% endblock %}
+
+{% block quad_bottom %}
+{{ plot.period('plot.dg.arbeiten.heizung.stellwert', 'dg.arbeiten.heizung.stellwert', 'avg', '1w', 0, 0, 100, '', 'Stellwert', '', '', '', '1h') }}
+{% endblock %}
+

@@ -1,0 +1,79 @@
+/**
+ * -----------------------------------------------------------------------------
+ * @package     smartVISU
+ * @author      Niko Will
+ * @copyright   2013
+ * @license     GPL <http://www.gnu.de>
+ * -----------------------------------------------------------------------------
+ */
+
+{% extends "base.html" %}
+
+{% block title %}
+Wohnen
+{% endblock %}
+
+{% block header %}
+<img class="icon" src='{{ icon0 }}it_television.svg'/>
+{% endblock %}
+
+{% block content %}
+{% import "widget_list.html" as list %}
+<ul data-role="listview" data-dividertheme="c" class="nw_list">
+    <li data-role="list-divider">Beleuchtung</li>  
+    {{ list.dimmer('eg.wohnen.licht','Deckenleuchte','eg.wohnzimmer.licht_decke.switch','eg.wohnzimmer.licht_decke.dim') }}
+    {{ list.switch('eg.wohnen.licht_tv','TV-Backlight','eg.wohnzimmer.std_tv_licht.switch','','message_socket.svg','message_socket.svg') }}
+    {{ list.switch('eg.wohnen.licht_sideboard','Sideboard-Backlight','eg.wohnzimmer.std_sideboard_licht.switch','','message_socket.svg','message_socket.svg') }}
+    {{ list.dimmer('eg.essenzimmer','Esstisch','eg.esszimmer.licht_decke.switch','eg.esszimmer.licht_decke.dim') }}
+    <li data-role="list-divider">Steckdosen</li> 
+    {{ list.flip('flip_std_fernseher','Fernseher','eg.wohnzimmer.std_tv.switch','uzsu.eg_wohnzimmer_std_tv','an','aus') }}
+    {{ list.flip('flip_std_fensterlaibung','Fensterlaibung','eg.wohnzimmer.std_fensterlaibung.switch','uzsu.eg_wohnzimmer_std_fensterlaibung','an','aus') }}
+    {{ list.flip('flip_std_buffet','Buffet','eg.esszimmer.std_buffet.switch','uzsu.eg_esszimmer_std_buffet','an','aus') }}
+    {{ list.flip('flip_std_giebel','Giebelfenster','eg.esszimmer.std_giebel.switch','uzsu.eg_esszimmer_std_giebel','an','aus') }}
+	{{ list.blind('EG.Wohnen.raffstore1', 'Balkon', 'EG.Wohnen.raffstore1.move', 'EG.Wohnen.raffstore1.stop', 'EG.Wohnen.raffstore1.position', 'EG.Wohnen.raffstore1.shift','EG.Wohnen.raffstore1.angle', 'EG.Wohnen.raffstore1.uzsu' ,'0','100')  }}
+	</ul>
+
+{% endblock %}
+
+{% block quad_top %}
+{% import "widget_list.html" as list %}
+<ul data-role="listview" data-dividertheme="c" class="nw_list">
+    <li data-role="list-divider">Verstärker</li>  
+    {{ list.slider('volume', 'Volume', 'mm.denon.main.MasterVolume', 0, 25, 1) }}
+    {{ list.mswitch('powe_mute', 'Power / Mute ',['mm.denon.main.Power','mm.denon.main.Mute'], '', ['','audio_volume_mute.svg'],['','audio_volume_high.svg'])}}
+</ul>
+
+    /**AVR*/
+
+	<table height="90%" width="90%" align="center">
+		<tr>
+			<td width="30%" align="left">InputSelect</td>
+			<td width="70%" align="right">
+				{{ basic.value('mm.denon.05','mm.denon.main.Input') }}</td>
+		</tr>
+		<tr>
+			<td width="30%" align="left">InputSelect</td>
+			<td width="70%" align="right">
+				{{ basic.button('mm.denon.05_1','mm.denon.main.Input','','','TUNER') }}</td>
+		</tr>
+		<tr>
+			<td width="30%" align="left">Surround Mode</td>
+			<td width="70%" align="right">
+				{{ basic.value('mm.denon.06','mm.denon.main.SurrMode') }}</td>
+		</tr>
+		<tr>
+			<td width="30%" align="left">NDR2</td>
+			<td width="70%" align="right">
+				{{ basic.button('mm.denon.07', 'mm.denon.main.seturi','','','http://www.ndr.de/resources/metadaten/audio/m3u/ndr2_mv.m3u') }}</td>
+		</tr>
+		<tr>
+			<td width="20%" align="left">Now Playing</td>
+			<td width="80%" align="right">
+				{{ basic.value('mm.denon.08','mm.denon.status.nowPlaying') }}</td>
+		</tr>
+	</table>
+
+{% endblock %}
+
+{% block quad_bottom %}
+{% endblock %}

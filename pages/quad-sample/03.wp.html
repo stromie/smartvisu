@@ -1,0 +1,69 @@
+/**
+ * -----------------------------------------------------------------------------
+ * @package     smartVISU
+ * @author      Niko Will
+ * @copyright   2013
+ * @license     GPL <http://www.gnu.de>
+ * -----------------------------------------------------------------------------
+ */
+
+
+{% extends "base.html" %}
+
+{% block title %}
+Wärmepumpe
+{% endblock %}
+
+{% block header %}
+<img class="icon" src='{{ icon0 }}sani_earth_source_heat_pump.svg'/>
+{% endblock %}
+
+{% block content %}
+{% import "widget_list.html" as list %}
+<ul data-role="listview" data-dividertheme="c" class="nw_list">
+    {{ list.maptext('status_wp_text', 'Betriebstatus', 'ebus.status_wp', ['Sommer', 'Heizen', 'Standby', 'Warmwasser', ''], [0, 3, 6, 8, ''])}}
+    {{ list.maptext('status_hk_text', 'Heizbetrieb', 'ebus.status_hk', ['Heizen', 'Aus', 'Auto', 'Eco', 'Absenken'], [1, 2, 3, 4, 5]) }}
+/**                    {{ basic.button('trigger_hk1', 'ebus.status_hk','Heizen', '', 1) }}
+*                    {{ basic.button('trigger_hk2', 'ebus.status_hk', 'Aus', '', 2) }}
+*                    {{ basic.button('trigger_hk3', 'ebus.status_hk', 'Auto', '', 3) }}
+*                    {{ basic.button('trigger_hk4', 'ebus.status_hk', 'Eco', '', 4) }}
+*                    {{ basic.button('trigger_hk5', 'ebus.status_hk', 'Absenken', '', 5) }}
+*/
+    {{ list.maptext('status_ww_text', 'Warmwasser', 'ebus.status_ww', ['An', 'Aus', 'Auto'], [1, 2, 3])}}
+/**                    {{ basic.button('trigger_ww1', 'ebus.status_ww','An', '', 1) }}
+*                    {{ basic.button('trigger_ww2', 'ebus.status_ww', 'Aus', '', 2) }}
+*                    {{ basic.button('trigger_ww3', 'ebus.status_ww', 'Auto', '', 3) }}
+*/
+    {{ list.format('***wp.state_since', 'Status seit', 'wp.state_since', 'transExSecondsToHMS', '', true) }}
+    <li data-role="list-divider">Temperaturen</li>
+    {{ list.float('wp.temp_vl', 'Vorlauf', 'ebus.VF2', '°C') }}
+    {{ list.float('wp.temp_rl', 'Rücklauf', 'ebus.T5', '°C') }}
+    {{ list.float('wp.temp_vl_soll', 'Vorlauf Soll', 'ebus.hk_soll', '°C') }}
+    {{ list.float('wp.temp_wq_ein', 'Wärmequelle Ein', 'ebus.brine_in', '°C') }}
+    {{ list.float('wp.temp_wq_aus', 'Wärmequelle Aus', 'ebus.brine_out', '°C') }}
+    {{ list.float('wp.temp_ww', 'Wasserspeicher', 'ebus.ww_temp', '°C') }}
+    <li data-role="list-divider">Betriebsstunden</li>
+    {{ list.value('wp.hours_wp', 'Wärmepumpe', 'ebus.kompressorstunden', 'h',3) }}
+    {{ list.value('wp.hours_heating', 'Heizung', 'ebus.kompressorstunden_heizung', 'h') }}
+    {{ list.value('wp.hours_ww', 'Warmwasser', 'ebus.kompressorstunden_ww', 'h') }}
+/**    {{ list.value('***wp.hours_zwe', 'Zusatzwärmeerzeuger', 'wp.hours_zwe', 'h') }}
+*/
+    <li data-role="list-divider">Wärmemenge</li>
+/**    {{ list.format('***wp.wmz_heating', 'Heizung', 'wp.wmz_heating', 'transExKwhToMwh', 'MWh') }}
+*    {{ list.format('***wp.wmz_ww', 'Warmwasser', 'wp.wmz_ww', 'transExKwhToMwh', 'MWh') }}
+*    {{ list.value('***wp.wmz_output', 'Durchfluss', 'wp.wmz_output', 'l/h') }}
+*/
+
+</ul>
+{% endblock %}
+
+{% block quad_top %}
+{{ plot.period('plot.wp.temp_vl_rl', ['ebus.VF2.sql', 'ebus.T5.sql', 'ebus.hk_soll.sql', 'ow.AT_Nord.sql'], 'max', '3d', '', '', '', '', ['Vorlauf', 'Rücklauf', 'Vorlauf Soll', 'Außentemperatur'], '', '', '', '') }}
+{% endblock %}
+
+{% block quad_bottom %}
+{{ plot.period('wpptag', 'zaehler.wp.verbrauch.gestern', 'avg', '7d', '', '', '', '', 'WP', '#aa0', 'area', '', '') }}
+/**{{ plot.period('plot.wp.temp_wq', ['wp.temp_wq_ein', 'wp.temp_wq_aus'], 'min', '3d', 0, -10, 40, '', ['Wärmequelle Ein', 'Wärmequelle Aus'], '', '', '', '1h') }}
+*/
+{% endblock %}
+

@@ -1,0 +1,40 @@
+/**
+ * -----------------------------------------------------------------------------
+ * @package     smartVISU
+ * @author      Mirko Hirsch
+ * @copyright   2015
+ * @license     GPL <http://www.gnu.de>
+ * -----------------------------------------------------------------------------
+ */
+
+
+{% extends "base.html" %}
+
+{% block title %}
+Flure
+{% endblock %}
+
+{% block header %}
+<img class="icon" src='{{ icon0 }}scene_hall.svg'/>
+{% endblock %}
+
+{% block content %}
+{% import "widget_list.html" as list %}
+<ul data-role="listview" data-dividertheme="c" class="nw_list">
+    <li data-role="list-divider">Erdgeschoss</li>
+    {{ list.dimmer('eg.flur.licht','Hausflur','eg.flur_gross.licht_decke.switch','eg.flur_gross.licht_decke.dim') }}
+    {{ list.dimmer('eg.treppe.licht','Flur klein','eg.flur_klein.licht_decke.switch','eg.flur_klein.licht_decke.dim') }}
+    {{ list.rtr('eg.flur.heizung', 'Heizung', 'ow.EG_Flur_RT', 'eg.flur.heizung.stellwert', 'eg.flur.heizung.soll', 'eg.flur.heizung.sollwertverschiebung', '', '', '', 'eg.flur.heizung.heizen') }}
+    
+    <li data-role="list-divider">Obergeschoss</li>
+    {{ list.dimmer('og.flur.licht', 'Flur', 'og.flur.licht_decke.switch', 'og.flur.licht_decke.dim', '', 'og.flur.pm.sperre') }}
+</ul>
+{% endblock %}
+
+
+{% block quad_top %}
+{% endblock %}
+
+{% block quad_bottom %}
+{% endblock %}
+

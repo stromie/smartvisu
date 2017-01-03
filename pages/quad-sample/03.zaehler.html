@@ -1,0 +1,47 @@
+/**
+ * -----------------------------------------------------------------------------
+ * @package     smartVISU
+ * @author      Mirko Hirsch
+ * @copyright   2015
+ * @license     GPL <http://www.gnu.de>
+ * -----------------------------------------------------------------------------
+ */
+
+{% extends "base.html" %}
+
+{% block title %}
+Zaehler
+{% endblock %}
+
+{% block header %}
+<img class="icon" src='{{ icon0 }}measure_power_meter.svg'/>
+{% endblock %}
+
+{% block quad_main_top %}
+    
+{% import "widget_list.html" as list %}
+<ul data-role="listview" data-dividertheme="c" class="nw_list">
+    {{ list.mstring('string', '',['Haushalt','WP'],['icons/ws/measure_power_meter.svg','icons/ws/sani_heating.svg'])}}
+    {{ list.mfloat('akt_leistung', 'Aktuelle Leistung', ['zaehler.haushalt.leistung','zaehler.wp.cop.tag'], ['kW','cop']) }}
+    {{ list.mfloat('verbrauch_heute', 'Verbrauch Heute', ['zaehler.haushalt.verbrauch.tag','zaehler.wp.verbrauch.tag'], ['kWh','kWh']) }}
+    {{ list.mfloat('verbrauch_gestern', 'Verbrauch Gestern', ['zaehler.haushalt.verbrauch.gestern','zaehler.wp.verbrauch.gestern'], ['kWh','kWh']) }}
+    {{ list.mfloat('verbrauch_vorgestern', 'Verbrauch Vorgestern', ['zaehler.haushalt.verbrauch.vorgestern','zaehler.wp.verbrauch.vorgestern'], ['kWh','kWh']) }}
+    {{ list.mvalue('kosten_heute', 'Kosten Heute', ['zaehler.haushalt.kosten.heute','zaehler.wp.kosten.heute'], ['€','€']) }}
+    {{ list.mvalue('kosten_gestern', 'Kosten Gestern', ['zaehler.haushalt.kosten.gestern','zaehler.wp.kosten.gestern'], ['€','€']) }}
+    {{ list.mvalue('kosten_vorgestern', 'Kosten Vorgestern', ['zaehler.haushalt.kosten.vorgestern','zaehler.wp.kosten.vorgestern'], ['€','€']) }}
+</ul>
+{% endblock %}
+
+{% block quad_main_bottom %}
+    {{ plot.period('pstunde', 'zaehler.haushalt.leistung.sql', 'avg', '24h', '', '', '', '', 'Haushalt', '#a00', 'line', '', '') }}    
+{% endblock %}
+
+
+{% block quad_top %}
+    {{ plot.stacked('plot_verbrauch', ['zaehler.wp.verbrauch.gestern', 'ebus.cop.ww_strom.gestern','zaehler.wp.cop.gestern'], 'max', '1w', '', '', '', ['Gesamt', 'Warmwasser','COP'], 'false', '', ['area', 'area','line']) }} 
+{% endblock %}
+
+{% block quad_bottom %}
+    {{ plot.period('ptag', 'zaehler.haushalt.verbrauch.gestern', 'avg', '1w', '', '', '', '', 'Haushalt', '#aa0', 'area', '', '') }}
+{% endblock %}
+

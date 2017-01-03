@@ -1,0 +1,35 @@
+/**
+ * -----------------------------------------------------------------------------
+ * @package     smartVISU
+ * @author      Mirko Hirsch
+ * @copyright   2015
+ * @license     GPL <http://www.gnu.de>
+ * -----------------------------------------------------------------------------
+ */
+
+{% extends "base.html" %}
+
+{% block title %}
+Quickstart
+{% endblock %}
+
+{% block header %}
+<img class="icon" src='{{ icon0 }}control_all_on_off.svg'/>
+{% endblock %}
+
+{% block content %}
+{% import "widget_list.html" as list %}
+
+<ul data-role="listview" data-dividertheme="c" class="nw_list">
+    <li data-role="list-divider">Wärmepumpe</li>
+    {{ list.float('wp.temp_ww', 'Wasserspeicher', 'ebus.ww_temp', '°C') }}
+    {{ list.button('trigger_speicher1', 'Speicherladung aktivieren', 'ebus.speicherladung', 'Start', 'icons/ws/control_on_off.svg', '1') }}
+</ul>
+
+{% endblock %}
+
+{% block quad_top %}
+{% endblock %}
+
+{% block quad_bottom %}
+{% endblock %}

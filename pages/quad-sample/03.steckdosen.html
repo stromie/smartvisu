@@ -1,0 +1,50 @@
+/**
+ * -----------------------------------------------------------------------------
+ * @package     smartVISU
+ * @author      Niko Will
+ * @copyright   2013
+ * @license     GPL <http://www.gnu.de>
+ * -----------------------------------------------------------------------------
+ */
+
+
+{% extends "base.html" %}
+
+{% block title %}
+Licht
+{% endblock %}
+
+{% block header %}
+<img class="icon" src='{{ icon0 }}light_light.svg'/>
+{% endblock %}
+
+{% block content %}
+{% import "widget_list.html" as list %}
+<ul data-role="listview" data-dividertheme="c" class="nw_list">
+    <li data-role="list-divider">Erdgeschoss</li>
+    {{ list.switch('eg.wohnen.tv','TV','eg.wohnzimmer.std_tv.switch', 'eg.wohnzimmer.std_tv.switch.uzsu', 'message_socket.svg', 'message_socket.svg') }}
+    {{ list.switch('eg.wohnen.licht_tv','TV-Backlight','eg.wohnzimmer.std_tv_licht.switch', 'eg.wohnzimmer.std_tv_licht.switch.uzsu', 'message_socket.svg', 'message_socket.svg') }}
+    {{ list.switch('eg.wohnen.licht_sideboard','Sideboard-Backlight','eg.wohnzimmer.std_sideboard_licht.switch', 'eg.wohnzimmer.std_sideboard_licht.switch.uzsu', 'message_socket.svg', 'message_socket.svg') }}
+    {{ list.switch('eg.essen.std_giebel','Giebelfenster','eg.esszimmer.std_giebel.switch', 'eg.esszimmer.std_giebel.switch.uzsu', 'message_socket.svg', 'message_socket.svg') }}
+    {{ list.switch('eg.essen.std_buffet','Buffet','eg.esszimmer.std_buffet.switch', 'eg.esszimmer.std_buffet.switch.uzsu', 'message_socket.svg', 'message_socket.svg') }}
+    {{ list.switch('eg.flur_gross.std_tuer','Hausflur Tür','eg.flur_gross.std_tuer.switch', 'eg.flur_gross.std_tuer.switch.uzsu', 'message_socket.svg', 'message_socket.svg') }}
+
+<li data-role="list-divider">Obergeschoss</li>
+    {{ list.dimmer('og.schlafen.wakeup', 'Wakeup-Light', 'og.schlafen.std_wakeup_light.switch', 'og.schlafen.std_wakeup_light.dim', 'uzsu.og_schlafzimmer_std_wakeup_light') }}
+    {{ list.switch('og.flur.schau','Schau in ...','og.flur.std_schau.switch', 'og.flur.std_schau.switch.uzsu', 'message_socket.svg', 'message_socket.svg') }}
+    {{ list.switch('og.bruno.std_nachtlicht','Nachtlicht','og.bruno.std_nachtlicht.switch', 'og.bruno.std_nachtlicht.switch.uzsu', 'message_socket.svg', 'message_socket.svg') }}
+    {{ list.switch('og.bruno.std_Fenster','Fenster','og.bruno.std_fenster.switch', 'og.bruno.std_fenster.switch.uzsu', 'message_socket.svg', 'message_socket.svg') }}
+     
+<li data-role="list-divider">Garage</li>
+    {{ list.switch('hwr.waschmaschine','Waschmaschine','hwr.waschmaschine.switch', 'hwr.waschmaschine.switch.uzsu', 'message_socket.svg', 'message_socket.svg') }}
+  
+<li data-role="list-divider">Dachboden</li>
+    {{ list.switch('dg.std','Dachboden','dg.std.switch', 'dg.std.uzsu', 'message_socket.svg', 'message_socket.svg') }}
+ 
+<li data-role="list-divider">Garten</li>
+    {{ list.switch('garten.terasse.std','Terassensteckdose','garten.terasse.std.switch', 'garten.terasse.std.uzsu', 'message_socket.svg', 'message_socket.svg') }}
+ 
+</ul>
+
+{% endblock %}
+

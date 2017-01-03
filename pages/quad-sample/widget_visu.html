@@ -1,0 +1,218 @@
+/**
+* Displays a formatted value
+*
+* @param unique id for this widget
+* @param a gad/item
+* @param a name of a format function
+* @param a unit, tries to get the format for that unit from the language-file (optional)
+* @param the parent html-tag for the value (optional, default 'span')
+*/
+{% macro format(id, gad, format, unit, tag) %}
+
+	<{{ tag|default('span') }} id="{{ uid(page, id) }}" data-widget="visu.format" data-item="{{ gad }}"
+    data-unit="{{ unit }}" data-format="{{ format }}">-.- {{ unit }}</{{ tag|default('span') }}>
+
+{% endmacro %}
+
+/**
+ * display a value
+ *
+ * @param       unique id for this widget
+ * @param       a gad/item
+ * @param       a unit (optional)
+ * @param       the parent html-tag for the value (optional, default 'span')
+ */
+{% macro percent(id, gad, tag) %}
+
+   <{{ tag|default('span') }} id="{{ uid(page, id) }}" data-widget="visu.percent" data-item="{{ gad }}"
+                data-unit="%">--- %</{{ tag|default('span') }}>
+
+{% endmacro %}
+
+{% macro lbutton(id, gad_short, gad_long, pic, val) %} 
+    <span id="{{ uid(page, id) }}" data-widget="visu.button" data-item="{{ gad_short }},{{ gad_long }}"
+                data-val="{{ val|default('1') }}"
+                class="switch"><a><img class="icon" src="{{ icon0 }}{{ pic }}"/></a>
+    </span> 
+{% endmacro %} 
+
+{% macro shifter(id, gad_value, pic, min, max) %}
+
+    <span id="{{ uid(page, id) }}" data-widget="visu.shifter" data-item="{{ gad_value }}"
+                data-pic="{{ pic|default(icon0~'light_light_dim_00.svg') }}"
+        data-min="{{ min|default('0') }}" data-max="{{ max|default('100') }}" class="switch">
+        <img class="icon" src="{{ pic|default(icon0~'light_light_dim_00.svg') }}"/>
+    </span>
+
+{% endmacro %}
+
+
+{% macro map(id, gad_value, map_min, map_max, map_str) %}
+
+    <span id="{{ uid(page, id) }}" data-widget="visu.map" data-item="{{ gad_value }}"
+        data-map-str="{{ implode(map_str) }}" 
+        data-map-min="{{ implode(map_min) }}" 
+        data-map-max="{{ implode(map_max) }}">
+    </span>
+
+{% endmacro %}
+
+{% macro uzsu_icon(id, type, gad_uzsu, min, max, pic_on, pic_off) %}
+
+	<span id="{{ uid(page, id) }}" data-widget="visu.uzsu_icon" data-item="{{ gad_uzsu }}" data-type="{{ type }}"
+        data-min="{{ min|default('0') }}" data-max="{{ max|default('255') }}"
+		data-pic-on="{{ pic_on|default(icon1~'time_clock.svg') }}" data-pic-off="{{ pic_off|default(icon0~'time_clock.svg') }}"
+        class="switch"><a><img class="icon" src="{{ pic_off|default(icon0~'time_clock.svg') }}" /></a>
+    </span>
+
+{% endmacro %}
+
+/**
+ *
+ *
+ *
+ *
+ * CUSTOMS
+ *
+ *
+ *
+ *
+*/
+
+/**
+* Displays a flip-switch
+*
+* @param unique id for this widget
+* @param a item
+* @param text for the 'on' state (optional, default 'On')
+* @param text for the 'off' state (optional, default 'Off')
+*/
+{% macro flip(id, item, txt_on, txt_off) %}
+
+	<div class="ui-flipswitch ui-shadow-inset ui-bar-inherit">
+	  <span tabindex="1" class="ui-flipswitch-on ui-btn ui-shadow ui-btn-inherit">On</span>
+	  <span class="ui-flipswitch-off">Off</span>
+	  <input type="checkbox" data-role="flipswitch" data-enhanced="true" data-corners="false" name="flip-checkbox" class="ui-flipswitch-input">
+	</div>
+/**
+	
+	<select id="{{ uid(page, id) }}" data-widget="basic.flip" data-item="{{ item }}"
+		data-role="flipswitch">
+		<option value="off">{{ txt_off|default('Off') }}</option>
+		<option value="on">{{ txt_on|default('On') }}</option>
+	</select>
+*/
+{% endmacro %}
+
+/**
+{% macro flip(id, gad, txt_on, txt_off) %}
+
+	<select id="{{ uid(page, id) }}" data-widget="visu.flip" data-item="{{ gad }}"
+		data-role="slider">
+		<option value="off">{{ txt_off|default('Off') }}</option>
+		<option value="on">{{ txt_on|default('On') }}</option>
+	</select>
+
+{% endmacro %}
+*/
+{% macro button(id, gad_button, button_txt, pic, val) %} 
+    <span id="{{ uid(page, id) }}" data-widget="visu.button" data-item="{{ gad_button }}"
+                data-val="{{ val|default('1') }}"
+                class="switch">
+            <div>{{ button_txt|e }}{% if pic %}<a><img class="icon" src="{{ pic|default(icon0~'control_on_off.svg') }}"/></a>{% endif %}
+	    </div>
+    </span> 
+{% endmacro %} 
+
+/**
+* A simple widget for plotting stacked charts
+*
+* @param unique id for this widget
+* @param series of item/s. More item/s in array form: [ item1 , item2 ]
+* @param the mode: 'avg', 'sum', 'min', 'max'
+* @param the minimum time (x-axis): '1h', '2h'... (duration-format)
+* @param the maximum time (x-axis): '', '1h', '2h'... (duration-format, default: now)
+* @param the minimum y-axis (optional)
+* @param the maximum y-axis (optional)
+* @param label/s for each series (optional)
+* @param stacklabel if the aggregated values should be shown, true/false (optional, default true)
+* @param color/s for each series e. g. '#f00' for red (optional, default: sutiable for design)
+* @param type/s for each series (exposure): 'line', 'stair', 'spline', 'area', 'areaspline', 'column' (optional, default 'line')
+* @param count number of data points to load, default 100
+* @param correctdate whether to delete last data point (if stats from previous
+*
+* @see misc/fundamentals#Array-Form
+* @see misc/fundamentals#Duration-Format
+*/
+{% macro stacked(id, gad, mode, tmin, tmax, ymin, ymax, label, stacklabels, color, exposure, count, correctdate) %}
+
+	<div id="{{ uid(page, id) }}" data-widget="plot.stacked" data-item="{{ implode(gad, [mode|default('avg'), tmin|default('1h'), tmax|default('now')]) }}"
+		{% if ymin is not empty %} data-ymin="{{ ymin }}" {% endif %} {% if ymax is not empty %} data-ymax="{{ ymax }}" {% endif %}
+		data-label="{{ implode(label) }}" data-stacklabels="{{ stacklabels|default(true) }}" data-correctdate="{{ correctdate|default('false') }}"
+		data-color="{{ implode(color) }}" data-exposure="{{ implode(exposure) }}" data-axis="{{ implode(axes) }}"
+		{% if count is not empty %} data-count="{{ count }}" {% endif %}
+		class="plot"></div>
+
+{% endmacro %}
+
+{% macro slider(id, gad, min, max, step, mode) %}
+
+	<input id="{{ uid(page, id) }}" data-widget="visu.slider" data-item="{{ gad }}"
+		type="range" value="0" min="{{ min|default(0) }}" max="{{ max|default(255) }}" step="{{ step|default(5) }}"
+		orientation="{{ mode }}" data-highlight="true" />
+
+{% endmacro %}
+
+
+{% macro maptext(id, gad, txt, val) %}
+    <div class="text">
+    <span
+    id="{{ uid(page, id) }}" data-widget="visu.maptext" data-item="{{ gad }}" data-txt ="{{ implode(txt) }}" data-val ="{{ implode(val)|default('') }}" class="text">
+    </span>
+    </div>
+{% endmacro %}
+
+/**
+* A switch, build of two pics
+*
+* @param unique id for this widget
+* @param a gad/item
+* @param the text, printed when gad has value val (optional)
+* @param the pic for the 'on' state (optional)
+* @param the pic for the 'off' state (optional)
+* @param value send for the 'on' state (optional, default 1)
+* @param value send for the 'off' state (optional, default 0)
+*/
+{% macro activelist(id, gad, txt, pic_on, pic_off, val_on, val_off) %}
+
+    <span id="{{ uid(page, id) }}" data-widget="visu.activelist" data-item="{{ gad }}"
+        data-val-on="{{ val_on|default('1') }}" data-val-off="{{ val_off|default('0') }}"
+         data-pic-on="{{ pic_on|default(icon1~'control_on_off.svg') }}"  data-pic-off="{{ pic_off|default(icon0~'control_on_off.svg') }}"
+         class="switch"><a><img class="icon" src="{{  pic_off|default(icon0~'control_on_off.svg') }}" /></a>{{ txt}}  <br>   </span>
+
+{% endmacro %}
+
+
+/** 
+* Widget for displaying notification badges
+*
+* @id unique id for this widget
+* @gad a gad/item
+*/
+
+{% macro notifybadge(id, gad) %}
+
+    <span id="{{ uid(page, id) }}" data-widget="visu.notifybadge" data-item="{{ gad }}" >
+    </span>
+	
+{% endmacro %}
+
+
+{% macro sound(id, gad, match, file, volume, titel, message) %}
+
+    <audio id="{{ uid(page, id) }}" preload="auto" data-widget="visu.sound" data-item="{{ gad }}" soundfile="{{ file }}"  volume="{{ volume }}"
+	   match="{{ match }}" title ="{{ titel }}" message="{{ message }}">
+    <source src={{ file }} />
+    </audio>
+
+{% endmacro %}

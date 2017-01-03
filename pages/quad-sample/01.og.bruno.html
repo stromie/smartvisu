@@ -1,0 +1,33 @@
+/**
+ * -----------------------------------------------------------------------------
+ * @package     smartVISU
+ * @author      Niko Will
+ * @copyright   2013
+ * @license     GPL <http://www.gnu.de>
+ * -----------------------------------------------------------------------------
+ */
+
+{% extends "base.html" %}
+
+{% block title %}
+Bruno
+{% endblock %}
+
+{% block header %}
+<img class="icon" src='{{ icon0 }}scene_childs_room.svg'/>
+{% endblock %}
+
+{% block content %}
+{% import "widget_list.html" as list %}
+<ul data-role="listview" data-dividertheme="c" class="nw_list">
+    {{ list.dimmer('og.bruno.licht', 'Bruno', 'og.bruno.licht_decke.switch', 'og.bruno.licht_decke.dim') }}    
+    {{ list.switch('eg.bruno.std_fenster','Nachtlicht Fenster','og.bruno','','message_socket.svg','message_socket.svg') }}
+    {{ list.switch('eg.bruno.std_bett','Lampe Bett','og.bruno','','message_socket.svg','message_socket.svg') }}
+</ul>
+{% endblock %}
+
+{% block quad_top %}
+{% endblock %}
+
+{% block quad_bottom %}
+{% endblock %}

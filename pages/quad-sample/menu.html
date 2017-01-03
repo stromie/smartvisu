@@ -1,0 +1,40 @@
+/**
+ * -----------------------------------------------------------------------------
+ * @package     smartVISU
+ * @author      Mirko Hirsch
+ * @copyright   2015
+ * @license     GPL <http://www.gnu.de>
+ * -----------------------------------------------------------------------------
+ */
+{% import "widget_visu.html" as visu %}
+
+<div id="menu" class="menu">
+
+	<a id="menu-rooms" data-ajax="false" href="index.php">
+        <img class="icon {{ page starts with 'index' or page starts with 'room' ? 'icon1' }}" src="{{ icon0 }}control_building_empty.svg"/></a>
+
+			<a id="menu-sound" data-ajax="false" href="index.php?page=03.sound">		
+		<img class="icon {{ page == 'squeezebox' ? 'icon1' }}" src="{{ icon0 }}audio_audio.svg"/></a>
+		
+	<a id="menu-system" data-ajax="false" href="index.php?page=config">
+		<img class="icon {{ page == 'config' ? 'icon1' }}" src="{{ icon0 }}edit_settings.svg"/></a>
+
+/**
+ * -----------------------------------------------------------------------------
+ * visu.notifybadge
+ * -----------------------------------------------------------------------------
+ *     <a id="menu-system" href="index.php?page=03.test">
+ *      {{ visu.notifybadge('Test-Number', 'ebus.status_hk') }}</a>
+ */  
+
+</div>
+
+
+
+/**
+ * -----------------------------------------------------------------------------
+ * visu.sound
+ * -----------------------------------------------------------------------------
+ * {{ visu.sound('sound1', 'eg.esszimmer.licht_decke.switch', 1, 'pages/b6/sounds/new_message.mp3', '10', 'Licht', 'Test - Licht im Esszimmer') }}
+ */
+ 

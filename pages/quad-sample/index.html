@@ -1,0 +1,214 @@
+/**
+ * -----------------------------------------------------------------------------
+ * @package     smartVISU
+ * @author      Martin Gleiß
+ * @copyright   2012
+ * @license     GPL <http://www.gnu.de>
+ * ----------------------------------------------------------------------------- 
+ */
+ 
+
+{% extends "base.html" %}
+
+{% block header %}
+    {{ lib.smartvisu }}
+    <div class="mini"><span class="miniclock">{{ now|date('H:i') }}</span>, {{ now|date('d.m,') }} v{{ config_version }}</div>
+{% endblock %}
+
+{% block quad_top %}
+{% endblock %}
+
+{% block quad_bottom %}
+{% endblock %}
+
+
+{% block content %}
+/**KACHELN*/    
+<ul data-role="listview" data-dividertheme="c" class="nw_tiles">
+/**QUICKSTART*********/     
+    <li data-icon="false">
+    <a href="index.php?page=03.quickstart">
+        <img class="icon" src="{{ icon0 }}control_all_on_off.svg"/><h3>Quickstart</h3>
+            <div class="ui-ri-aside">
+            </div>
+    </a>
+    </li>
+/**LICHT**************/     
+    <li data-icon="false">
+    <a href="index.php?page=03.licht">
+        <img class="icon" src="{{ icon0 }}light_light.svg"/><h3>Licht</h3>
+            <div class="ui-ri-aside">
+            </div>
+    </a>
+    </li>
+/**STECKDOSEN***************/     
+    <li data-icon="false">
+    <a href="index.php?page=03.steckdosen">
+        <img class="icon" src="{{ icon0 }}message_socket.svg"/><h3>Steckdosen</h3>
+            <div class="ui-li-aside">
+            </div>
+    </a>
+    </li>
+/**HEIZUNG*************/     
+    <li data-icon="false">
+    <a href="index.php?page=03.heizung">
+        <img class="icon" src="{{ icon0 }}sani_heating.svg"/><h3>Heizung</h3>
+            <div class="ui-ri-aside">
+            </div>
+    </a>
+    </li>
+/**WÄRMEPUMPE*********/        
+    <li data-icon="false">
+    <a href="index.php?page=03.wp">
+        <img class="icon" src="{{ icon0 }}sani_earth_source_heat_pump.svg"/><h3>Wärmepumpe</h3>
+            <div class="ui-ri-aside">
+            </div>
+    </a>
+    </li>
+/**ZÄHLER*********/        
+    <li data-icon="false">
+    <a href="index.php?page=03.zaehler">
+        <img class="icon" src="{{ icon0 }}measure_power_meter.svg"/><h3>Zähler</h3>
+            <div class="ui-ri-aside">
+            </div>
+    </a>
+    </li>
+/**WOHNZIMMER*********/    
+    <li data-icon="false">
+    <a href="index.php?page=00.eg.wohnen">
+        <img class="icon" src="{{ icon0 }}it_television.svg"/><h3>Wohnen</h3>
+            <div class="ui-li-aside">
+		{{ basic.float('wohnen_temperatur', 'ow.EG_Wohnzimmer_RT_MS', '°') }} <br />
+		{{ basic.symbol('wohnzimmer_licht_decke', 'eg.wohnzimmer.licht_decke.switch', 'Wohnzimmer', 'light_light.svg') }}
+		{{ basic.symbol('esszimmer_licht_decke', 'eg.esszimmer.licht_decke.switch', 'Esszimmer', 'light_light.svg') }}
+            </div>
+    </a>
+    </li>
+/**KUECHE*************/     
+    <li data-icon="false">
+    <a href="index.php?page=00.eg.kueche">
+        <img class="icon" src="{{ icon0 }}scene_cooking.svg"/><h3>Kochen</h3>
+            <div class="ui-li-aside">
+                {{ basic.float('kueche_temperatur', 'ow.EG_Kueche_RT', '°') }} <br />
+		{{ basic.symbol('kueche_licht_decke', 'eg.kueche.licht_decke.switch', 'Decke', 'light_light.svg') }}
+            </div>
+    </a>
+    </li>
+/**FLURE*************/ 
+    <li data-icon="false">
+    <a href="index.php?page=00.00.flure">
+        <img class="icon" src="{{ icon0 }}scene_hall.svg"/><h3>Flure</h3>
+            <div class="ui-li-aside">
+		{{ basic.float('flur-eg_temperatur', 'ow.EG_Flur_RT', '°') }} <br/>
+		{{ basic.float('flur_temperatur', 'ow.OG_Flur_RT', '°') }} <br/>
+		{{ basic.symbol('flur-gross_licht_decke', 'eg.flur_gross.licht_decke.switch', 'Decke', 'light_light.svg') }}
+		{{ basic.symbol('flur-klein_licht_decke', 'eg.flur_klein.licht_decke.switch', 'Decke', 'light_light.svg') }}
+                {{ basic.symbol('flur_licht_decke', 'og.flur.licht_decke.switch', 'Decke', 'light_light.svg') }}
+                {{ basic.symbol('flur_pm_sperre', 'og.flur.pm.sperre', 'gesperrt', 'message_presence_disabled.svg') }}
+	    </div>
+    </a>
+    </li>
+/**GARTEN*********/ 
+    <li data-icon="false">
+    <a href="index.php?page=aa.garten">
+        <img class="icon" src="{{ icon0 }}scene_garden.svg"/><h3>Garten</h3>
+            <div class="ui-ri-aside">
+            </div>
+    </a>
+    </li>
+/**SCHLAFZIMMER*******/ 
+    <li data-icon="false">
+    <a href="index.php?page=01.og.schlafen">
+        <img class="icon" src="{{ icon0 }}scene_sleeping.svg"/><h3>Schlafen</h3>
+            <div class="ui-li-aside">
+                    {{ basic.float('temp_schlafen', 'ow.OG_Schlafzimmer_RT_MS', '°') }} <br />
+                    {{ basic.symbol('licht_schlafen_ankleide', 'og.schlafen.licht_ankleide.switch', 'Ankleide an', 'light_light.svg') }}
+                    {{ basic.symbol('licht_schlafen_decke', 'og.schlafen.licht_decke.switch', 'Decke', 'light_light.svg') }}
+                    {{ basic.symbol('std_schlafen_wakeup_light', 'og.schlafen.std_wakeup_light.switch', 'WakeUp', 'light_light.svg') }}
+            </div>
+    </a>
+    </li>
+/**BAD****************/ 
+    <li data-icon="false">
+    <a href="index.php?page=01.og.bad">
+        <img class="icon" src="{{ icon0 }}scene_bathroom.svg"/><h3>Bad</h3>
+            <div class="ui-li-aside">
+		{{ basic.float('temp_bad', 'ow.OG_Bad_RT_MS', '°') }} <br />
+		{{ basic.symbol('licht_bad_spiegel', 'og.bad.licht_spiegel.switch', 'Spiegellicht an', 'light_light.svg') }}
+		{{ basic.symbol('licht_bad_spots', 'og.bad.licht_spots.switch', 'Spots', 'light_light.svg') }}
+		{{ basic.symbol('licht_bad_wanne', 'og.bad.licht_wanne.switch', 'Badewanne an', 'light_light.svg') }}
+		{{ basic.symbol('licht_bad_dusche', 'og.bad.licht_dusche.switch', 'Duschlicht an', 'light_light.svg') }}
+	    </div>
+    </a>
+    </li>
+/**ARBEITSZIMMER******/ 
+    <li data-icon="false">
+    <a href="index.php?page=01.og.arbeiten">
+        <img class="icon" src="{{ icon0 }}scene_office.svg"/><h3>Arbeiten</h3>
+            <div class="ui-li-aside">
+		{{ basic.float('arbeitszimmer_temperatur', 'ow.OG_Arbeitszimmer_RT_MS', '°') }} <br />
+		{{ basic.symbol('licht_arbeiten_direkt', 'og.arbeiten.licht_decke_direkt.switch', 'Decke direkt', 'light_light.svg') }}
+		{{ basic.symbol('licht_arbeiten_indirekt', 'og.arbeiten.licht_decke_indirekt.switch', 'Decke indirekt', 'light_light.svg') }}
+	    </div>
+    </a>
+    </li>
+/**BRUNO**************/ 
+    <li data-icon="false">
+    <a href="index.php?page=01.og.bruno">
+        <img class="icon" src="{{ icon0 }}scene_childs_room.svg"/><h3>Bruno</h3>
+            <div class="ui-li-aside">
+		{{ basic.float('bruno_temperatur', 'ow.OG_Bruno_RT', '°') }} <br />
+		{{ basic.symbol('bruno_licht_decke', 'og.bruno.licht_decke.switch', 'Decke', 'light_light.svg') }}
+            </div>
+    </a>
+    </li>
+/**KARL***************/ 
+    <li data-icon="false">
+    <a href="index.php?page=01.og.karl">
+        <img class="icon" src="{{ icon0 }}scene_visit_guests.svg"/><h3>Karl</h3>
+            <div class="ui-li-aside">
+                {{ basic.float('karl_temperatur', 'ow.OG_Karl_RT', '°') }} <br />
+                {{ basic.symbol('karl_licht_decke', 'og.karl.licht_decke.switch', 'Decke', 'light_light.svg') }}
+            </div>
+    </a>
+    </li>
+/**SYSTEM*************/     
+    <li data-icon="false">
+    <a href="index.php?page=03.system">
+        <img class="icon" src="{{ icon0 }}it_server.svg"/><h3>Server</h3>
+            <div class="ui-ri-aside">
+            </div>
+    </a>
+    </li>
+/**TEST***************/     
+    <li data-icon="false">
+    <a href="index.php?page=03.test">
+        <img class="icon" src="{{ icon0 }}secur_locked.svg"/><h3>Test</h3>
+            <div class="ui-ri-aside">
+            </div>
+    </a>
+    </li>
+/**FILL***************/     
+    <li data-icon="false">
+    <a href="index.php?page=index">
+            <div class="ui-ri-aside">
+            </div>
+    </a>
+    </li>
+    
+</ul>
+
+/**WETTER*/
+<div style="padding: 20px">
+    {% import "lib.html" as lib %}
+    {{ lib.updatecheck() }}
+        
+    {% import "weather.html" as weather %}
+    {{ weather.forecastweek('weather_forecast') }}
+/**        <hr/>
+*        {{ weather.current('weather') }}    
+*        <hr/>
+*/
+    </div>
+{% endblock %}
+
